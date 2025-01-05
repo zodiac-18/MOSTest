@@ -62,6 +62,7 @@ function start_experiment() {
     /*
         or you can write simply as
     */
+    method_paths.push(wav_dir + "set" + set_num + "./wav/set1/natural.list");
     method_paths.push(wav_dir + "set" + set_num + "./wav/set1/SiFiGAN.list");
     method_paths.push(wav_dir + "set" + set_num + "./wav/set1/VAE_SiFiGAN_v1.list");
     method_paths.push(wav_dir + "set" + set_num + "./wav/set1/VAE_SiFiGAN_v2.list");
