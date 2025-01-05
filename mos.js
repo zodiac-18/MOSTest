@@ -63,10 +63,10 @@ function start_experiment() {
         or you can write simply as
     */
     if (set_num == "1") {
-        method_paths.push(wav_dir + "set" + set_num + "./wav/set1/natural.list");
-        method_paths.push(wav_dir + "set" + set_num + "./wav/set1/SiFiGAN.list");
-        method_paths.push(wav_dir + "set" + set_num + "./wav/set1/VAE_SiFiGAN_v1.list");
-        method_paths.push(wav_dir + "set" + set_num + "./wav/set1/VAE_SiFiGAN_v2.list");
+        method_paths.push(wav_dir + "set" + set_num + "/natural.list");
+        method_paths.push(wav_dir + "set" + set_num + "/SiFiGAN.list");
+        method_paths.push(wav_dir + "set" + set_num + "/VAE_SiFiGAN_v1.list");
+        method_paths.push(wav_dir + "set" + set_num + "/VAE_SiFiGAN_v2.list");
     }
     /*
         end
