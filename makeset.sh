@@ -1,49 +1,25 @@
 #!/bin/bash
 
 # 指定のコピー元ディレクトリ
-SOURCE_DIR="/home/ogita23/nas01home/sifigan/SiFiGAN/egs/namine_ritsu/exp/vae_sifigan_mel/wav/500000"
+SOURCE_DIR="/home/ogita23/nas01home/sifigan/SiFiGAN/egs/namine_ritsu/data/wav"
 
 # 指定のコピー先ディレクトリ
-DEST_DIR="/home/ogita23/mrnas03home/MOSTest/wav/set1/VAE-SiFiGAN_v1"
+DEST_DIR="/home/ogita23/mrnas03home/MOSTest/wav/set1/natural"
 
 # 指定のファイル
 FILES=(
-    "namine_ritsu_1st_color_seg1_f1.00.wav"
-    "namine_ritsu_1st_color_seg18_f1.00.wav"
-    "namine_ritsu_ARROW_seg5_f1.00.wav"
-    "namine_ritsu_ARROW_seg13_f1.00.wav"
-    "namine_ritsu_BC_seg2_f1.00.wav"
-    "namine_ritsu_BC_seg13_f1.00.wav"
-    "namine_ritsu_BC_seg20_f1.00.wav"
-    "namine_ritsu_Closetoyou_seg5_f1.00.wav"
-    "namine_ritsu_Closetoyou_seg10_f1.00.wav"
-    "namine_ritsu_Closetoyou_seg24_f1.00.wav"
-    "namine_ritsu_ERROR_seg3_f1.00.wav"
-    "namine_ritsu_ERROR_seg21_f1.00.wav"
-    "namine_ritsu_1st_color_seg1_f0.50.wav"
-    "namine_ritsu_1st_color_seg18_f0.50.wav"
-    "namine_ritsu_ARROW_seg5_f0.50.wav"
-    "namine_ritsu_ARROW_seg13_f0.50.wav"
-    "namine_ritsu_BC_seg2_f0.50.wav"
-    "namine_ritsu_BC_seg13_f0.50.wav"
-    "namine_ritsu_BC_seg20_f0.50.wav"
-    "namine_ritsu_Closetoyou_seg5_f0.50.wav"
-    "namine_ritsu_Closetoyou_seg10_f0.50.wav"
-    "namine_ritsu_Closetoyou_seg24_f0.50.wav"
-    "namine_ritsu_ERROR_seg3_f0.50.wav"
-    "namine_ritsu_ERROR_seg21_f0.50.wav"
-    "namine_ritsu_1st_color_seg1_f2.00.wav"
-    "namine_ritsu_1st_color_seg18_f2.00.wav"
-    "namine_ritsu_ARROW_seg5_f2.00.wav"
-    "namine_ritsu_ARROW_seg13_f2.00.wav"
-    "namine_ritsu_BC_seg2_f2.00.wav"
-    "namine_ritsu_BC_seg13_f2.00.wav"
-    "namine_ritsu_BC_seg20_f2.00.wav"
-    "namine_ritsu_Closetoyou_seg5_f2.00.wav"
-    "namine_ritsu_Closetoyou_seg10_f2.00.wav"
-    "namine_ritsu_Closetoyou_seg24_f2.00.wav"
-    "namine_ritsu_ERROR_seg3_f2.00.wav"
-    "namine_ritsu_ERROR_seg21_f2.00.wav"
+    "namine_ritsu_1st_color_seg1.wav"
+    "namine_ritsu_1st_color_seg18.wav"
+    "namine_ritsu_ARROW_seg5.wav"
+    "namine_ritsu_ARROW_seg13.wav"
+    "namine_ritsu_BC_seg2.wav"
+    "namine_ritsu_BC_seg13.wav"
+    "namine_ritsu_BC_seg20.wav"
+    "namine_ritsu_Closetoyou_seg5.wav"
+    "namine_ritsu_Closetoyou_seg10.wav"
+    "namine_ritsu_Closetoyou_seg24.wav"
+    "namine_ritsu_ERROR_seg3.wav"
+    "namine_ritsu_ERROR_seg21.wav"
 )
 
 # コピー先ディレクトリが存在しない場合は作成
