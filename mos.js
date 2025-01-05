@@ -47,6 +47,8 @@ function start_experiment() {
         this is an example which enables each set
         includes different number of methods.
     */
+
+    /*
     if (set_num == "1") {
         method_paths.push(wav_dir + "set" + set_num + "/method1.list");
         method_paths.push(wav_dir + "set" + set_num + "/method2.list");
@@ -55,11 +57,14 @@ function start_experiment() {
         method_paths.push(wav_dir + "set" + set_num + "/method2.list");
         method_paths.push(wav_dir + "set" + set_num + "/method3.list");
     }
+    */
+
     /*
         or you can write simply as
     */
-    // method_paths.push(wav_dir + "set" + set_num + "/method1.list");
-    // method_paths.push(wav_dir + "set" + set_num + "/method2.list");
+    method_paths.push(wav_dir + "set" + set_num + "/SiFiGAN.list");
+    method_paths.push(wav_dir + "set" + set_num + "/VAE_SiFiGAN_v1.list");
+    method_paths.push(wav_dir + "set" + set_num + "/VAE_SiFiGAN_v2.list");
     /*
         end
     */
