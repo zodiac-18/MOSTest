@@ -15,7 +15,7 @@ def parse_arguments():
     parser.add_argument(
         "--root_dir", "-r", 
         type=str, 
-        default="./wav/set1/", 
+        default="./wav/set3/", 
         help="Root directory to search wav files."
     )
     parser.add_argument(
@@ -38,6 +38,8 @@ def main():
 
     meter = None
     processed_count = 0
+    
+    meter = pyln.Meter(24000)
 
     for wav_path in filelist:
         # 波形読み込み
@@ -47,13 +49,12 @@ def main():
             print(f"Could not read file: {wav_path}. Skipped. Error: {e}")
             continue
 
-        # モノラル・ステレオなどチャンネル数確認
-        # pyloudnorm.Meter は一度だけ sr 指定して使い回しでも構わない
-        # ただしサンプリングレートが毎回違うかもしれないので、都度作成
-        meter = pyln.Meter(sr)  # EBU R128
-
         # ラウドネス計測
         loudness = meter.integrated_loudness(data)
+        
+        if round(loudness, 2) == args.target_lufs:
+            print(f"[{processed_count}] Already normalized: {wav_path}  (original loudness {loudness:.2f} LUFS)")
+            continue
 
         # すでに目標より大幅に大きい or 小さい音量の場合、正規化
         # pyloudnorm では下記で波形を -24 dB LUFS に合わせる

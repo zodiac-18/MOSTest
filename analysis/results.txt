@@ -1,0 +1,31 @@
+MOS Results
+f1.00, Natural: MOS=4.341±0.071, 95% CI=(4.270, 4.412), n=408
+f1.00, SiFiGAN: MOS=4.324±0.078, 95% CI=(4.246, 4.401), n=408
+f1.00, VAE_SiFiGAN_v1: MOS=4.216±0.081, 95% CI=(4.134, 4.297), n=408
+f1.00, VAE_SiFiGAN_v2: MOS=4.304±0.075, 95% CI=(4.229, 4.379), n=408
+f0.50, SiFiGAN: MOS=2.478±0.103, 95% CI=(2.375, 2.581), n=408
+f0.50, VAE_SiFiGAN_v1: MOS=1.850±0.087, 95% CI=(1.764, 1.937), n=408
+f0.50, VAE_SiFiGAN_v2: MOS=3.044±0.107, 95% CI=(2.937, 3.151), n=408
+f2.00, SiFiGAN: MOS=2.456±0.114, 95% CI=(2.342, 2.570), n=408
+f2.00, VAE_SiFiGAN_v1: MOS=2.654±0.109, 95% CI=(2.546, 2.763), n=408
+f2.00, VAE_SiFiGAN_v2: MOS=3.245±0.117, 95% CI=(3.128, 3.362), n=408
+
+T-Test Results
+
+Results for f0=f1.00:
+Natural vs SiFiGAN: t=0.320, p=7.4895e-01, d=0.022, g=0.022 (Not significant), Winner: Group 1
+Natural vs VAE_SiFiGAN_v1: t=2.272, p=2.3354e-02, d=0.159, g=0.159 (Significant), Winner: Group 1
+Natural vs VAE_SiFiGAN_v2: t=0.697, p=4.8598e-01, d=0.049, g=0.049 (Not significant), Winner: Group 1
+SiFiGAN vs VAE_SiFiGAN_v1: t=1.884, p=5.9972e-02, d=0.132, g=0.132 (Not significant), Winner: Group 1
+SiFiGAN vs VAE_SiFiGAN_v2: t=0.356, p=7.2190e-01, d=0.025, g=0.025 (Not significant), Winner: Group 1
+VAE_SiFiGAN_v1 vs VAE_SiFiGAN_v2: t=-1.563, p=1.1849e-01, d=-0.109, g=-0.109 (Not significant), Winner: Group 2
+
+Results for f0=f0.50:
+SiFiGAN vs VAE_SiFiGAN_v1: t=9.180, p=3.6747e-19, d=0.643, g=0.642 (Significant), Winner: Group 1
+SiFiGAN vs VAE_SiFiGAN_v2: t=-7.497, p=1.7063e-13, d=-0.525, g=-0.524 (Significant), Winner: Group 2
+VAE_SiFiGAN_v1 vs VAE_SiFiGAN_v2: t=-17.037, p=1.4384e-55, d=-1.193, g=-1.192 (Significant), Winner: Group 2
+
+Results for f0=f2.00:
+SiFiGAN vs VAE_SiFiGAN_v1: t=-2.478, p=1.3398e-02, d=-0.174, g=-0.173 (Significant), Winner: Group 2
+SiFiGAN vs VAE_SiFiGAN_v2: t=-9.489, p=2.5066e-20, d=-0.664, g=-0.664 (Significant), Winner: Group 2
+VAE_SiFiGAN_v1 vs VAE_SiFiGAN_v2: t=-7.258, p=9.1996e-13, d=-0.508, g=-0.508 (Significant), Winner: Group 2
