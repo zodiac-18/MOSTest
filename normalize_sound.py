@@ -15,14 +15,14 @@ def parse_arguments():
     parser.add_argument(
         "--root_dir", "-r", 
         type=str, 
-        default="./wav/set3/", 
+        default="./wav/", 
         help="Root directory to search wav files."
     )
     parser.add_argument(
         "--target_lufs", "-t",
         type=float,
-        default=-24.0,
-        help="Target loudness in dB LUFS (default: -24.0)."
+        default=-23.0,
+        help="Target loudness in dB LUFS (default: -23.0)."
     )
     return parser.parse_args()
 
