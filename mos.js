@@ -18,88 +18,112 @@ function invalid_enter() {
 
 // start experiment
 function start_experiment() {
-    // get user name
-    var name = document.getElementById("name").value.replace(" ", "_");
-    if (name == "") {
+    // ユーザ名の取得（空白はアンダースコアに変換）
+    var name = document.getElementById("name").value.trim().replace(/ /g, "_");
+    if (name === "") {
         alert("Please enter your name.");
         return false;
     }
 
-    // get setlist number
-    var set_num = "0"
-    var number = document.getElementsByName("set");
-    for (var i = 0; i < number.length; i++) {
-        if (number[i].checked) {
-            set_num = number[i].value;
+    // set番号の取得
+    var set_num = "";
+    var set_elements = document.getElementsByName("set");
+    for (var i = 0; i < set_elements.length; i++) {
+        if (set_elements[i].checked) {
+            set_num = set_elements[i].value;
+            break;
         }
     }
-    if (set_num == "0") {
-        alert("Please press the setlist number button.");
+    if (set_num === "") {
+        alert("Please select a set number.");
         return false;
     }
 
-    // convert display
+    // multiplier（A, B, C）の取得
+    var multiplier = "";
+    var mult_elements = document.getElementsByName("multiplier");
+    for (var i = 0; i < mult_elements.length; i++) {
+        if (mult_elements[i].checked) {
+            multiplier = mult_elements[i].value;
+            break;
+        }
+    }
+    if (multiplier === "") {
+        alert("Please select a multiplier option (A, B, or C).");
+        return false;
+    }
+
+    // 表示切替
     Display();
 
-    var method_paths = [];
-    /*
-        you have to customize this part
-        this is an example which enables each set
-        includes different number of methods.
-    */
-
-    /*
-    if (set_num == "1") {
-        method_paths.push(wav_dir + "set" + set_num + "/method1.list");
-        method_paths.push(wav_dir + "set" + set_num + "/method2.list");
-    } else if (set_num == "2") {
-        method_paths.push(wav_dir + "set" + set_num + "/method1.list");
-        method_paths.push(wav_dir + "set" + set_num + "/method2.list");
-        method_paths.push(wav_dir + "set" + set_num + "/method3.list");
+    // ベースディレクトリ（wav/直下）
+    const wav_dir = "wav/";
+    // 対象setのベースパス
+    var base_path = wav_dir + "set" + set_num + "/";
+    // 各セットは表面的には、set{set_num}_{multiplier} となる
+    // 再生用のディレクトリは、選択されたmultiplierに対応
+    var effective_dir = "";
+    if (multiplier === "A") {
+        effective_dir = base_path + "f0.50/";
+    } else if (multiplier === "B") {
+        effective_dir = base_path + "f1.00/";
+    } else if (multiplier === "C") {
+        effective_dir = base_path + "f2.00/";
     }
-    */
 
-    /*
-        or you can write simply as
-    */
-    method_paths.push(wav_dir + "set" + set_num + "/Natural.list");
-    method_paths.push(wav_dir + "set" + set_num + "/SiFiGAN.list");
-    method_paths.push(wav_dir + "set" + set_num + "/VAE_SiFiGAN_v1.list");
-    method_paths.push(wav_dir + "set" + set_num + "/VAE_SiFiGAN_v2.list");
-    /*
-        end
-    */
+    // 但し、B (f1.00) の場合は Natural.list も使い、A (f0.50) および C (f2.00) の場合は Natural.list を除外する
+    var method_paths = [];
+    if (multiplier === "B") {
+        method_paths.push(base_path + "f1.00/Natural.list");
+        method_paths.push(base_path + "f1.00/SiFiGAN.list");
+        method_paths.push(base_path + "f1.00/VAE-SiFiGAN.list");
+        method_paths.push(base_path + "f1.00/wo_prior.list");
+    } else if (multiplier === "A") {
+        method_paths.push(base_path + "f0.50/SiFiGAN.list");
+        method_paths.push(base_path + "f0.50/VAE-SiFiGAN.list");
+        method_paths.push(base_path + "f0.50/wo_prior.list");
+    } else if (multiplier === "C") {
+        method_paths.push(base_path + "f2.00/SiFiGAN.list");
+        method_paths.push(base_path + "f2.00/VAE-SiFiGAN.list");
+        method_paths.push(base_path + "f2.00/wo_prior.list");
+    }
 
+    // ファイルリストの作成
     file_list = makeFileList(method_paths);
-    outfile = name + "_set" + set_num + ".csv";
+    // 出力CSVのファイル名を、名前_set{set_num}_{multiplier}.csv とする
+    outfile = name + "_set" + set_num + "_" + multiplier + ".csv";
+    // 評価スコア初期化
     scores = (new Array(file_list.length)).fill(0);
-    eval = document.getElementsByName("eval");
+    // 評価用ラジオボタンの要素
+    eval_buttons = document.getElementsByName("eval");
+    // 初期化
     init();
 }
 
-// convert display
+// 表示切替
 function Display() {
     document.getElementById("Display1").style.display = "none";
     document.getElementById("Display2").style.display = "block";
 }
 
-// load text file
+// テキストファイル読み込み
 function loadText(filename) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", filename, false);
     xhr.send(null);
     var list = xhr.responseText.split(/\r\n|\r|\n/);
-
-    list.pop();
-
+    // 空行除去
+    if (list[list.length - 1] === "") {
+        list.pop();
+    }
     return list;
 }
 
-// make file list
+// ファイルリスト作成：各リストファイルの内容を結合し、シャッフルする
 function makeFileList(method_paths) {
     var files = [];
     for (var i = 0; i < method_paths.length; i++) {
-        tmp = loadText(method_paths[i]);
+        var tmp = loadText(method_paths[i]);
         files = files.concat(tmp);
     }
     files.shuffle();
@@ -107,12 +131,10 @@ function makeFileList(method_paths) {
 }
 
 function setAudio() {
-    document.getElementById("page").textContent = "" + (n + 1) + "/" + scores.length;
-
-    document.getElementById("audio").innerHTML = 'Voice:<br>'
-        + '<audio src="' + file_list[n]
-        + '" controls preload="auto">'
-        + '</audio>';
+    document.getElementById("page").textContent = (n + 1) + "/" + scores.length;
+    document.getElementById("audio").innerHTML = 'Voice:<br>' +
+        '<audio src="' + file_list[n] + '" controls preload="auto">' +
+        '</audio>';
 }
 
 function init() {
@@ -123,40 +145,32 @@ function init() {
 }
 
 function evalCheck() {
-    const c = scores[n];
-    if ((c <= 0) || (c > eval.length)) {
-        for (var i = 0; i < eval.length; i++) {
-            eval[i].checked = false;
+    if (scores[n] <= 0 || scores[n] > eval_buttons.length) {
+        for (var i = 0; i < eval_buttons.length; i++) {
+            eval_buttons[i].checked = false;
         }
-    }
-    else {
-        eval[5 - c].checked = true;
+    } else {
+        eval_buttons[5 - scores[n]].checked = true;
     }
 }
 
 function setButton() {
-    if (n == (scores.length - 1)) {
+    if (n === (scores.length - 1)) {
         document.getElementById("prev").disabled = false;
         document.getElementById("next2").disabled = true;
         document.getElementById("finish").disabled = true;
-        for (var i = 0; i < eval.length; i++) {
-            if (eval[i].checked) {
+        for (var i = 0; i < eval_buttons.length; i++) {
+            if (eval_buttons[i].checked) {
                 document.getElementById("finish").disabled = false;
                 break;
             }
         }
-    }
-    else {
-        if (n == 0) {
-            document.getElementById("prev").disabled = true;
-        }
-        else {
-            document.getElementById("prev").disabled = false;
-        }
+    } else {
+        document.getElementById("prev").disabled = (n === 0);
         document.getElementById("next2").disabled = true;
         document.getElementById("finish").disabled = true;
-        for (var i = 0; i < eval.length; i++) {
-            if (eval[i].checked) {
+        for (var i = 0; i < eval_buttons.length; i++) {
+            if (eval_buttons[i].checked) {
                 document.getElementById("next2").disabled = false;
                 break;
             }
@@ -165,8 +179,8 @@ function setButton() {
 }
 
 function evaluation() {
-    for (var i = 0; i < eval.length; i++) {
-        if (eval[i].checked) {
+    for (var i = 0; i < eval_buttons.length; i++) {
+        if (eval_buttons[i].checked) {
             scores[n] = 5 - i;
         }
     }
@@ -176,15 +190,13 @@ function evaluation() {
 function exportCSV() {
     var csvData = "";
     for (var i = 0; i < file_list.length; i++) {
-        csvData += "" + file_list[i] + ","
-            + scores[i] + "\r\n";
+        csvData += file_list[i] + "," + scores[i] + "\r\n";
     }
-
-    const link = document.createElement("a");
+    var link = document.createElement("a");
     document.body.appendChild(link);
-    link.style = "display:none";
-    const blob = new Blob([csvData], { type: "octet/stream" });
-    const url = window.URL.createObjectURL(blob);
+    link.style.display = "none";
+    var blob = new Blob([csvData], { type: "octet/stream" });
+    var url = window.URL.createObjectURL(blob);
     link.href = url;
     link.download = outfile;
     link.click();
@@ -210,18 +222,15 @@ function finish() {
     exportCSV();
 }
 
-
-// directory name
+// directory name（wav/直下）
 const wav_dir = "wav/";
 
 // invalid enter key
 document.onkeypress = invalid_enter();
 
-// global variables
+// グローバル変数
 var outfile;
 var file_list;
 var scores;
-
-// since loadText() doesn't work in local
 var n = 0;
-var eval = document.getElementsByName("eval");
+var eval_buttons = document.getElementsByName("eval");

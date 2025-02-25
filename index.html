@@ -1,94 +1,70 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>MOS Test</title>
 </head>
-
 <body>
-
     <!-- 注意書きなど -->
-    <div style="border:1px solid #000000; padding: 10px; border-radius: 0px; background: ##ffffff;">
-        <p>
+    <div style="border:1px solid #000000; padding: 10px; border-radius: 0px; background: #ffffff;">
         <h1>MOS Test</h1>
-
-        Thank you for your cooperation in my experiment.</br>
-        This experiment is MOS test.</br>
-        Listen to the voices and give it the score you think it deserves.</br>
-        I will explain the experimental procedure.
-
-        <h2>Experimental Procedure</h2>
-        <ol>
-            <li>Enter your name and select the set list number (1 ~ 9) assigned to you by the experiment coordinator. </li>
-            <li>Press "Start Experiment" button.</li>
-            <li>Listen to the voices and give it the score you think it deserves.<br>
-                The evaluation criteria is <b>sound quality.</b></li>
-            <li>Press "next" button and start next evaluation.</li>
-            <li>When you finish this experiment, press "finish" button and download the result.<br>
-                Send it to slack or the following email address.</li>
-            <li>Email address: ogita.kenichi.i7@s.mail.nagoya-u.ac.jp</font>
-            </li>
-        </ol>
-
-        <h2>Notes</h2>
-        <ul>
-            <li>This experiment takes about 20 minutes.</li>
-            <li>DO NOT update the page during this experiment.</li>
-            <li>You may not be able to download the results on your phone, so please use your PC.</li>
-            <li>Please conduct the experiment in a quiet environment while wearing headphones or earphones.</li>
-        </ul>
-
+        <p>
+            Thank you for your cooperation in my experiment.<br>
+            This experiment is a MOS test.<br>
+            Listen to the voices and give them the score you think they deserve.<br>
+            I will explain the experimental procedure.
+        </p>
         <h2>実験手順</h2>
         <ol>
-            <li>名前を入力し、1~9のセット番号のうち、<b>指定されたセット番号</b>を選んで下さい。</li>
-            <li>"Start Experiment"を押して下さい。</li>
-            <li>音声を聴き、相応しいと思った評価を選択して下さい。<br>
+            <li>名前を入力し、1～9のセット番号から指定された番号を選んでください。</li>
+            <li>さらに、A（f0.50）、B（f1.00）、C（f2.00）のいずれかを選択してください。</li>
+            <li>"Start Experiment" を押してください。</li>
+            <li>音声を聴き、適切な評価を選択してください。<br>
                 評価基準は<b>音声品質</b>です。</li>
-            <li>選択を終えたら"next"ボタンを押し、次の実験に進んで下さい。</li>
-            <li>評価実験を全て終えたら"finish"ボタンを押して結果をダウンロードして下さい。<br>
-                結果はSlackか下記のメールアドレスに送信して下さい。</li>
-            <li>Emailアドレス: ogita.kenichi.i7@s.mail.nagoya-u.ac.jp</font>
-            </li>
+            <li>評価後、"next" ボタンを押して次に進んでください。</li>
+            <li>全て終えたら "finish" を押し、結果をダウンロードしてください。<br>
+                結果は Slack または下記のメールアドレスに送信してください。</li>
+            <li>Email: ogita.kenichi.i7@s.mail.nagoya-u.ac.jp</li>
         </ol>
-
         <h2>注意</h2>
         <ul>
-            <li>この実験は凡そ20分ほど要します。</li>
-            <li>実験中は<b>絶対にページの再読み込みは行わないで下さい</b>。</li>
-            <li>音声が再生できない場合は、コンテンツブロッカーをオフにするか、prevを押して前に戻り、nextを押して元に戻ると再生できる場合があります。</li>
-            <li>上記を試しても動作しない場合や、バグを発見した場合はSlackかメールアドレスまでご連絡ください。</li>
-            <li>スマートフォンでは結果をダウンロードできない場合があるのでPCを使用して下さい。</li>
-            <li><b>静音環境下でヘッドホンやイヤホンを着用した状態</b>で行って下さい。</li>
+            <li>この実験は約20分かかります。</li>
+            <li>実験中は<b>絶対にページを再読み込みしないでください</b>。</li>
+            <li>音声が再生できない場合は、コンテンツブロッカーをオフにするか、prev → next を試してください。</li>
+            <li>上記で解決しない場合は、Slackかメールでご連絡ください。</li>
+            <li>スマートフォンでは結果のダウンロードができない場合があるので、PCをご利用ください。</li>
+            <li><b>静かな環境でヘッドホンまたはイヤホンを着用してください。</b></li>
         </ul>
-        </p>
     </div>
 
     <script type="text/javascript" src="mos.js"></script>
 
     <div id="Display1">
-        <p> Your name: <br>
+        <p>Your name:<br>
             <input type="text" id="name" value="">
         </p>
-        <p> Setlist number: <br>
-            <label><input type="radio" name="set" id="number" value="1">1</label><br>
-            <label><input type="radio" name="set" id="number" value="2">2</label><br>
-            <label><input type="radio" name="set" id="number" value="3">3</label><br>
-            <label><input type="radio" name="set" id="number" value="4">4</label><br>
-            <label><input type="radio" name="set" id="number" value="5">5</label><br>
-            <label><input type="radio" name="set" id="number" value="6">6</label><br>
-            <label><input type="radio" name="set" id="number" value="7">7</label><br>
-            <label><input type="radio" name="set" id="number" value="8">8</label><br>
-            <label><input type="radio" name="set" id="number" value="9">9</label><br>
+        <p>Setlist number (1～9):<br>
+            <label><input type="radio" name="set" value="1">1</label>
+            <label><input type="radio" name="set" value="2">2</label>
+            <label><input type="radio" name="set" value="3">3</label>
+            <label><input type="radio" name="set" value="4">4</label>
+            <label><input type="radio" name="set" value="5">5</label>
+            <label><input type="radio" name="set" value="6">6</label>
+            <label><input type="radio" name="set" value="7">7</label>
+            <label><input type="radio" name="set" value="8">8</label>
+            <label><input type="radio" name="set" value="9">9</label>
+        </p>
+        <p style="margin-left:20px;">Multiplier:<br>
+            <label><input type="radio" name="multiplier" value="A">A</label><br>
+            <label><input type="radio" name="multiplier" value="B">B</label><br>
+            <label><input type="radio" name="multiplier" value="C">C</label><br>
+        </p>
         <p>
-            <button id="next1" onclick="start_experiment()">next</button>
+            <button id="next1" onclick="start_experiment()">Start Experiment</button>
         </p>
     </div>
 
-
     <div id="Display2" style="display:none;">
-        <!-- 注意書きなど <body onload="init()"> -->
         <p id="page"></p>
         <p id="audio"></p>
         <p>
@@ -98,14 +74,11 @@
             <label><input type="radio" name="eval" onclick="evaluation()">Poor</label><br>
             <label><input type="radio" name="eval" onclick="evaluation()">Bad</label><br>
         </p>
-
         <p>
             <button id="prev" onclick="prev()">prev</button>
             <button id="next2" onclick="next()">next</button>
             <button id="finish" onclick="finish()">finish</button>
         </p>
-
-
+    </div>
 </body>
-
 </html>
